@@ -34,3 +34,20 @@ elif selection == "2":
     ip_with_bits = f"{ip}/{cidr}"
 
     ip = netaddr.IPAddress(ip)
+    netmask = netaddr.IPNetwork(ip_with_bits).netmask
+    net = netaddr.IPNetwork(ip_with_bits).network
+    broadcast = netaddr.IPNetwork(ip_with_bits).broadcast
+    set = netaddr.IPSet([f"{net}/{cidr}"])
+
+    iprange = set.iprange()
+
+    print("IP Addresse Binär: " + ip.bits())
+    print("Subnetzmaske Binär: " + netmask.bits())
+
+    print("Subnetzadresse: " + str(net))
+    print("Subnetzmaske: " + str(netmask))
+    print("Broadcastadresse: " + str(broadcast))
+
+    print("Erster Host: " + str(netaddr.IPAddress(iprange.first+1)))
+    print("Letzer Host: " + str(str(netaddr.IPAddress(iprange.last-1))))
+
